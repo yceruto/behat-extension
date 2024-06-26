@@ -1,6 +1,6 @@
 # Behat Extension
 
-Set of Behat extensions to make your life easier.
+Set of [Behat](https://github.com/Behat/Behat) extensions to make your life easier.
 
 ## Exception Extension
 
