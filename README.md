@@ -36,9 +36,10 @@ Feature: Manage blog posts
   I want to manage my blog posts
   So I can keep my blog up to date
 
-  Scenario: Create a new blog post with invalid date
-    Given I set a published date in the past "2021-01-01"
-    Then an exception should be thrown containing message "The published date must be in the future."
+  Scenario: Edit a blog post with invalid date
+    Given I get a blog post with id "1"
+    And I set a published date "2021-01-01"
+    Then an exception should be thrown with message "The published date must be in the future."
 ```
 
 > [!NOTE]
@@ -57,9 +58,17 @@ class FeatureContext implements Context
     use ExceptionAssertionTrait;
 
     /**
-     * @Given I set a published date in the past :date
+     * @Given I get a blog post with id :id
      */
-    public function iSetAPublishedDateInThePast(string $date): void
+    public function iGetABlogPostWithId(int $id): void
+    {
+        // code that gets the blog post...
+    }
+
+    /**
+     * @Given I set a published date :date
+     */
+    public function iSetAPublishedDate(string $date): void
     {
         // code that throws an exception...
     
