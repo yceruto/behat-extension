@@ -61,6 +61,8 @@ class FeatureContext implements Context
      */
     public function iSetAPublishedDateInThePast(string $date): void
     {
+        // code that throws an exception...
+    
         throw new DomainException('The published date must be in the future.');
     }
 }
