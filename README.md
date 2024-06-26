@@ -33,17 +33,18 @@ Feature: Date parsing
 
   Scenario: Expected error on invalid date (!)
     Given I set an invalid date "0-2024"
-    Then an error should be thrown with message "Failed to parse time string (0-2024) at position 0 (0): Unexpected character"
+    Then an exception should be thrown containing message "Failed to parse time string (0-2024)"
 ```
 
 > [!NOTE]
 > Note that the `(!)` mark is mandatory to catch exceptions. If you don't use it, the exception will be thrown as usual.
 
-To check the exception message in your step definition, you can use the `ExceptionAssertionTrait`. It provides the
-`assertExceptionMessage` step to check the exception message. Otherwise, you can use the `ExceptionAssertion` class 
-directly if you want to check the exception message in a different way. 
+To check the exception class and message in your Behat step definition, you can use the `ExceptionAssertionTrait` in 
+your Behat context class. This trait provides useful assertion steps to verify if the thrown exception matches a 
+specific class or message. Alternatively, you can create a custom Behat step and use the `ExceptionAssertion` class 
+directly.
 
-Basic example:
+This is the Context class that implements the previous scenario:
 
 ```php
 class FeatureContext implements Context
