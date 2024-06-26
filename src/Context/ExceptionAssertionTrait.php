@@ -7,17 +7,26 @@ use Yceruto\BehatExtension\Assertion\ExceptionAssertion;
 trait ExceptionAssertionTrait
 {
     /**
-     * @Then /^an exception should be thrown with class "([^"]*)"$/
+     * @Then /^a "([^"]*)" exception should be thrown$/
      */
-    public function anExceptionIsThrownWithClass(string $expected): void
+    public function aClassExceptionShouldBeThrown(string $expected): void
     {
         ExceptionAssertion::assertExceptionClass($expected);
     }
 
     /**
+     * @Then /^a "([^"]*)" exception should be thrown with message "([^"]*)"$/
+     */
+    public function aClassExceptionShouldBeThrownWithMessage(string $class, string $message): void
+    {
+        ExceptionAssertion::assertExceptionClass($class);
+        ExceptionAssertion::assertExceptionMessage($message);
+    }
+
+    /**
      * @Then /^an exception should be thrown with message "([^"]*)"$/
      */
-    public function anExceptionIsThrownWithMessage(string $expected): void
+    public function anExceptionShouldBeThrownWithMessage(string $expected): void
     {
         ExceptionAssertion::assertExceptionMessage($expected);
     }
@@ -25,7 +34,7 @@ trait ExceptionAssertionTrait
     /**
      * @Then /^an exception should be thrown containing message "([^"]*)"$/
      */
-    public function anExceptionIsThrownContainingMessage(string $expected): void
+    public function anExceptionShouldBeThrownContainingMessage(string $expected): void
     {
         ExceptionAssertion::assertExceptionMessageContains($expected);
     }

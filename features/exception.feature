@@ -2,8 +2,7 @@ Feature: Exception extension
 
   Scenario: Expected error class (!)
       Given I throw a logic exception with message "foo"
-      Then an exception should be thrown with class "LogicException"
-      And an exception should be thrown with message "foo"
+      Then a "LogicException" exception should be thrown with message "foo"
 
   Scenario: Expected error with exact message (!)
     Given I throw an exception with "foo"
