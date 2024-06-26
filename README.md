@@ -37,7 +37,7 @@ Feature: Manage blog posts
   So I can keep my blog up to date
 
   Scenario: Create a new blog post with invalid date
-    Given I set an invalid published date "2021-01-01"
+    Given I set a published date in the past "2021-01-01"
     Then an exception should be thrown containing message "The published date must be in the future."
 ```
 
@@ -57,9 +57,9 @@ class FeatureContext implements Context
     use ExceptionAssertionTrait;
 
     /**
-     * @Given I set an invalid published date :date
+     * @Given I set a published date in the past :date
      */
-    public function iSetAnInvalidPublishedDate(string $date): void
+    public function iSetAPublishedDateInThePast(string $date): void
     {
         throw new DomainException('The published date must be in the future.');
     }
