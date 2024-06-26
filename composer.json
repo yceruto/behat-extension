@@ -1,0 +1,21 @@
+{
+    "name": "yceruto/behat-extension",
+    "description": "Set of Behat extensions",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Yceruto\\BehatExtension\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Yonel Ceruto",
+            "email": "open@yceruto.dev"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "behat/behat": "^3.14"
+    }
+}
