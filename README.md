@@ -4,7 +4,7 @@ Set of Behat extensions to make your life easier.
 
 ## Exception Extension
 
-This extension provides a way to catch exceptions thrown by Behat and check them in your tests.
+This extension provides a way to catch exceptions thrown by your behaviors and check them in your tests.
 
 ### Installation
 
@@ -25,7 +25,7 @@ default:
 ### Usage
 
 Once the extension is enabled, you can use the `(!)` mark in your scenario title to catch 
-exceptions thrown by your steps. Then, you can check the exception message using the 
+exceptions thrown by your Behat steps. Then, you can check the exception message using the 
 `Then an error should be thrown with message "..."` step:
 
 ```gherkin
@@ -39,12 +39,12 @@ Feature: Date parsing
 > [!NOTE]
 > Note that the `(!)` mark is mandatory to catch exceptions. If you don't use it, the exception will be thrown as usual.
 
-To check the exception class and message in your Behat step definition, you can use the `ExceptionAssertionTrait` in 
-your Behat context class. This trait provides useful assertion steps to verify if the thrown exception matches a 
-specific class or message. Alternatively, you can create a custom Behat step and use the `ExceptionAssertion` class 
-directly.
+To check the exception class and message in your Behat step definition, you can use the 
+`ExceptionAssertionTrait` in your Behat context class. This trait provides useful assertion 
+steps to verify if the thrown exception matches a specific class or message. Alternatively, 
+you can create a custom Behat step and use the `ExceptionAssertion` class directly.
 
-This is the Context class that implements the previous scenario:
+This is the Context class that implements the previous feature:
 
 ```php
 class FeatureContext implements Context
