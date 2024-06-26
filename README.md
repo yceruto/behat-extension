@@ -31,11 +31,14 @@ steps included in this package, you can then check the exception class and messa
 Example:
 
 ```gherkin
-Feature: Date parsing
+Feature: Manage blog posts
+  As a blog owner
+  I want to manage my blog posts
+  So I can keep my blog up to date
 
-  Scenario: Expected error on invalid date (!)
-    Given I set an invalid date "0-2024"
-    Then an exception should be thrown containing message "Failed to parse time string (0-2024)"
+  Scenario: Create a new blog post with invalid date
+    Given I set an invalid published date "2021-01-01"
+    Then an exception should be thrown containing message "The published date must be in the future."
 ```
 
 > [!NOTE]
@@ -54,11 +57,11 @@ class FeatureContext implements Context
     use ExceptionAssertionTrait;
 
     /**
-     * @Given I set an invalid date :date
+     * @Given I set an invalid published date :date
      */
-    public function iSetAnInvalidDate(string $date): void
+    public function iSetAnInvalidPublishedDate(string $date): void
     {
-        new DateTime($date);
+        throw new DomainException('The published date must be in the future.');
     }
 }
 ```
