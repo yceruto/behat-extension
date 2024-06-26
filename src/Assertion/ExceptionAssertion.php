@@ -12,7 +12,25 @@ final class ExceptionAssertion
         $actual = ExceptionAssertionState::getLastError()->getMessage();
 
         if ($actual !== $expected) {
-            throw new InnerResultException(sprintf('Expected exception with message: %s, got %s', $expected, $actual));
+            throw new InnerResultException(sprintf('Expected exception with message: %s, but got %s', $expected, $actual));
+        }
+    }
+
+    public static function assertExceptionMessageContains(string $expected): void
+    {
+        $actual = ExceptionAssertionState::getLastError()->getMessage();
+
+        if (!str_contains($actual, $expected)) {
+            throw new InnerResultException(sprintf('Expected exception message to contain: %s, but got %s', $expected, $actual));
+        }
+    }
+
+    public static function assertExceptionClass(string $expected): void
+    {
+        $actual = ExceptionAssertionState::getLastError()::class;
+
+        if (!str_contains($actual, $expected)) {
+            throw new InnerResultException(sprintf('Expected exception class: %s, but got %s', $expected, $actual));
         }
     }
 }
