@@ -72,7 +72,7 @@ class FeatureContext implements Context
     {
         // code that throws an exception...
     
-        throw new DomainException('The published date must be in the future.');
+        throw new DomainException('The published date must be in the past.');
     }
 }
 ```
