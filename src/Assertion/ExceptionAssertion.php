@@ -11,6 +11,8 @@ final class ExceptionAssertion
     {
         $actual = ExceptionAssertionState::getLastError()->getMessage();
 
+        $expected = str_replace('\\"', '"', $expected);
+
         if ($actual !== $expected) {
             throw new InnerResultException(sprintf('Expected exception with message: %s, but got %s', $expected, $actual));
         }
@@ -20,8 +22,19 @@ final class ExceptionAssertion
     {
         $actual = ExceptionAssertionState::getLastError()->getMessage();
 
+        $expected = str_replace('\\"', '"', $expected);
+
         if (!str_contains($actual, $expected)) {
             throw new InnerResultException(sprintf('Expected exception message to contain: %s, but got %s', $expected, $actual));
+        }
+    }
+
+    public static function assertExceptionMessageMatchesPattern(string $pattern): void
+    {
+        $actual = ExceptionAssertionState::getLastError()->getMessage();
+
+        if (!preg_match($pattern, $actual)) {
+            throw new InnerResultException(sprintf('Expected exception message to match pattern: "%s", got %s', $pattern, $actual));
         }
     }
 

@@ -3,6 +3,7 @@
 namespace Yceruto\BehatExtension\Model;
 
 use Behat\Gherkin\Node\ScenarioInterface as Scenario;
+use Behat\Testwork\Tester\Result\TestResult;
 use Yceruto\BehatExtension\Exception\InnerResultException;
 
 /**
@@ -20,9 +21,9 @@ final class ExceptionAssertionState
         self::$assertionExecuted = false;
     }
 
-    public static function tearDown(Scenario $scenario): void
+    public static function tearDown(TestResult $result): void
     {
-        if (self::$catchErrors) {
+        if (self::$catchErrors && $result->isPassed()) {
             if (null === self::$lastError) {
                 throw new InnerResultException('No exception was thrown. Remove "(!)" from the scenario title to disable the exception catching.');
             }

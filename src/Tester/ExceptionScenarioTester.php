@@ -31,7 +31,7 @@ final class ExceptionScenarioTester implements ScenarioTester
 
     public function tearDown(Environment $env, FeatureNode $feature, Scenario $scenario, $skip, TestResult $result): Teardown
     {
-        ExceptionAssertionState::tearDown($scenario);
+        ExceptionAssertionState::tearDown($result);
 
         return $this->baseTester->tearDown($env, $feature, $scenario, $skip, $result);
     }

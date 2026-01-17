@@ -16,11 +16,11 @@ class FeatureContext implements Context
     }
 
     /**
-     * @Given /^I throw an exception with "([^"]*)"$/
+     * @Given /^I throw an exception with "((?:[^"]|\\")*)"$/
      */
     public function iThrowAnExceptionWith(string $message): void
     {
-        throw new \Exception($message);
+        throw new \Exception(str_replace('\\"', '"', $message));
     }
 
     /**
@@ -28,6 +28,6 @@ class FeatureContext implements Context
      */
     public function iThrowALogicExceptionWithMessage(string $message): void
     {
-        throw new \LogicException($message);
+        throw new \LogicException(str_replace('\\"', '"', $message));
     }
 }
