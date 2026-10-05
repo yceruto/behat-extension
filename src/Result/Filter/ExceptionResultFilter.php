@@ -2,7 +2,6 @@
 
 namespace Yceruto\BehatExtension\Result\Filter;
 
-use Behat\Behat\Definition\Call\DefinitionCall;
 use Behat\Testwork\Call\CallResult;
 use Behat\Testwork\Call\Exception\CallErrorException;
 use Behat\Testwork\Call\Filter\ResultFilter;
@@ -14,7 +13,6 @@ final class ExceptionResultFilter implements ResultFilter
     public function supportsResult(CallResult $result): bool
     {
         return ExceptionAssertionState::$catchErrors
-            && $result->getCall() instanceof DefinitionCall
             && $result->hasException()
             && !$result->getException() instanceof InnerResultException
             && !$result->getException() instanceof CallErrorException;
