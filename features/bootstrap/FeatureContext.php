@@ -1,31 +1,26 @@
 <?php
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Yceruto\BehatExtension\Context\ExceptionAssertionTrait;
 
 class FeatureContext implements Context
 {
     use ExceptionAssertionTrait;
 
-    /**
-     * @Given /^I set an invalid date "([^"]*)"$/
-     */
+    #[Given('/^I set an invalid date "([^"]*)"$/')]
     public function iSetAnInvalidDate(string $date): void
     {
         new DateTime($date);
     }
 
-    /**
-     * @Given /^I throw an exception with "((?:[^"]|\\")*)"$/
-     */
+    #[Given('/^I throw an exception with "((?:[^"]|\\\\")*)"$/')]
     public function iThrowAnExceptionWith(string $message): void
     {
         throw new \Exception(str_replace('\\"', '"', $message));
     }
 
-    /**
-     * @Given /^I throw a logic exception with message "([^"]*)"$/
-     */
+    #[Given('/^I throw a logic exception with message "([^"]*)"$/')]
     public function iThrowALogicExceptionWithMessage(string $message): void
     {
         throw new \LogicException(str_replace('\\"', '"', $message));
