@@ -1,3 +1,0 @@
-default:
-    extensions:
-        Yceruto\BehatExtension\Extension\ExceptionExtension: ~

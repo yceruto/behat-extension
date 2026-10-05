@@ -16,8 +16,21 @@ jobs:
     strategy:
       matrix:
         php:
-          - 8.0
+          - 8.1
           - 8.3
+        behat:
+          - ^3.17
+        deps:
+          - highest
+        include:
+          # Behat 4 requires PHP >= 8.2, so it only runs on the newer PHP of the matrix
+          - php: 8.3
+            behat: ^4.0
+            deps: highest
+          # and one run pinned to the floor of the constraint
+          - php: 8.3
+            behat: ^3.17
+            deps: lowest
 
     steps:
     - name: Set up PHP
@@ -32,17 +45,11 @@ jobs:
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v3
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
 
     - name: Install dependencies
-      run: composer install --classmap-authoritative
+      run: |
+        composer require "behat/behat:${{ matrix.behat }}" --no-update --no-interaction
+        composer update --classmap-authoritative --no-interaction ${{ matrix.deps == 'lowest' && '--prefer-lowest --prefer-stable' || '' }}
 
     - name: Run tests
       run: vendor/bin/behat
