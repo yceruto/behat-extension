@@ -36,7 +36,7 @@ Feature: Manage blog posts
   I want to manage my blog posts
   So I can keep my blog up to date
 
-  Scenario: Edit a blog post with invalid date
+  Scenario: Edit a blog post with invalid date (!)
     Given I get a blog post with id "1"
     And I set a published date "3024-01-01"
     Then an exception should be thrown with message "The published date must be in the past."
